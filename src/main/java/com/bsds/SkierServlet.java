@@ -1,6 +1,5 @@
 package com.bsds;
 
-
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -23,7 +22,9 @@ import javax.servlet.http.HttpServletResponse;
 )
 public class SkierServlet extends HttpServlet {
     private final static String RABBITMQ_URL = "localhost";
-    private final static Integer MAX_CHANNEL_POOL_SIZE = 100;
+
+//    private final static String RABBITMQ_URL = "35.91.181.30";
+    private final static Integer MAX_CHANNEL_POOL_SIZE = 200;
     private final static String QUEUE_NAME = "skiersQueue";
     private RMQChannelPool rmqChannelPool;
 
@@ -70,11 +71,10 @@ public class SkierServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String payload;
-        PrintWriter out = response.getWriter();
-        payload = this.processData(request, response);
+        String payload = this.processData(request, response);
         this.publish(payload);
         response.setStatus(200);
+        PrintWriter out = response.getWriter();
         out.println("<h1>successfully add!</h1>");
         out.flush();
     }

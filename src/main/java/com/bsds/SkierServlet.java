@@ -18,12 +18,12 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(
         name = "SkierServlet",
-        value = {"/SkierServlet"}
+        value = {"/skier/*"}
 )
 public class SkierServlet extends HttpServlet {
-    private final static String RABBITMQ_URL = "localhost";
 
-//    private final static String RABBITMQ_URL = "35.91.181.30";
+    //private ip for rabbitmq instance
+    private final static String RABBITMQ_URL = "172.31.16.52";
     private final static Integer MAX_CHANNEL_POOL_SIZE = 200;
     private final static String QUEUE_NAME = "skiersQueue";
     private RMQChannelPool rmqChannelPool;
